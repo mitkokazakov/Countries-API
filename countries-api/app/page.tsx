@@ -4,6 +4,7 @@ import { IoIosSearch } from "react-icons/io";
 import { MdKeyboardArrowDown } from "react-icons/md";
 
 import { useState } from "react";
+import CountryCard from "./components/CountryCard";
 
 export default function Home() {
 
@@ -18,19 +19,25 @@ const [clickRegion, setClickRegion] = useState(false);
       </div>
 
       <div className="mt-10 w-full">
-        <div className=" w-2/4 text-left">
+        <div className=" w-2/4 relative">
           <div className="w-full flex justify-between items-center px-4 py-3 bg-white rounded-md">
             <p className="text-[10px] font-medium">Filter By Region</p>
             <MdKeyboardArrowDown className="text-md cursor-pointer" onClick={() => {setClickRegion(!clickRegion)}}/>
           </div>
 
-          <div className={`w-full duration-200 bg-white mt-2 pl-4 py-4 ${clickRegion ? 'opacity-1' : 'opacity-0'}`}>
+          <div className={`w-full duration-200 bg-white mt-2 absolute ${clickRegion ? 'h-auto opacity-1 pl-4 py-4' : 'h-0 opacity-0 p-0'}`}>
             <p className="py-1 text-[14px] font-medium">Europe</p>
             <p className="py-1 text-[14px] font-medium">Europe</p>
             <p className="py-1 text-[14px] font-medium">Europe</p>
             <p className="py-1 text-[14px] font-medium">Europe</p>
           </div>
         </div>
+      </div>
+
+      <div className="flex flex-col gap-8 px-8 mt-10">
+        <CountryCard />
+        <CountryCard />
+        <CountryCard />
       </div>
     </main>
   );
