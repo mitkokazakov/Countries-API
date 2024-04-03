@@ -15,7 +15,7 @@ const [clickRegion, setClickRegion] = useState(false);
 
       <div className="w-full shadow-md rounded-lg relative">
         <IoIosSearch className="absolute left-5 top-[50%] translate-y-[-50%] text-2xl text-slate-400" />
-        <input className="w-full py-3 pl-16 pr-4 rounded-lg outline-none text-xs" type="text" name="title" placeholder="Search for a country..." />
+        <input className="w-full py-3 pl-16 pr-4 rounded-lg outline-none text-xs dark:text-white" type="text" name="title" placeholder="Search for a country..." />
       </div>
 
       <div className="mt-10 w-full">
