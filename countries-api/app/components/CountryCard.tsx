@@ -5,7 +5,7 @@ const CountryCard = () => {
     <div className='flex flex-col rounded-lg shadow-md overflow-hidden'>
       <img src="https://flagcdn.com/w320/ax.png" alt="" />
 
-      <div className='flex flex-col justify-between items-start pl-6 pt-8 pb-10 dark:bg-[#2b3743]'>
+      <div className='flex flex-col justify-between items-start pl-6 pt-8 pb-10 dark:bg-[#2b3743] dark:text-white'>
         <h1 className='text-xl font-extrabold pb-4'>Germany</h1>
 
         <div className='flex flex-col gap-1'>

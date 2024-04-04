@@ -8,7 +8,7 @@ import CountryCard from "./components/CountryCard";
 
 export default function Home() {
 
-const [clickRegion, setClickRegion] = useState(false);
+  const [clickRegion, setClickRegion] = useState(false);
 
   return (
     <main className="flex min-h-screen flex-col items-center justify-start pt-10 px-4 bg-[#fafafa] font-nunito dark:bg-[#202d36]">
@@ -21,16 +21,16 @@ const [clickRegion, setClickRegion] = useState(false);
       <div className="mt-10 w-full">
         <div className=" w-2/4 relative">
           <div className="w-full flex justify-between items-center pl-6 pr-4 py-3 bg-white rounded-md shadow-md dark:bg-[#2b3743]">
-            <p className="text-[10px] font-medium">Filter By Region</p>
-            <MdKeyboardArrowDown className="text-md cursor-pointer" onClick={() => {setClickRegion(!clickRegion)}}/>
+            <p className="text-[10px] font-medium dark:text-white">Filter By Region</p>
+            <MdKeyboardArrowDown className="text-md cursor-pointer dark:text-white" onClick={() => { setClickRegion(!clickRegion) }} />
           </div>
 
           <div className={`w-full duration-200 bg-white dark:bg-[#2b3743] mt-2 absolute shadow-md ${clickRegion ? 'h-auto opacity-1 pl-6 py-4' : 'h-0 opacity-0 p-0'}`}>
-            <p className="py-1 text-[14px] font-medium">Africa</p>
-            <p className="py-1 text-[14px] font-medium">America</p>
-            <p className="py-1 text-[14px] font-medium">Asia</p>
-            <p className="py-1 text-[14px] font-medium">Europe</p>
-            <p className="py-1 text-[14px] font-medium">Oceania</p>
+            <p className="py-1 text-[14px] font-medium dark:text-white">Africa</p>
+            <p className="py-1 text-[14px] font-medium  dark:text-white">America</p>
+            <p className="py-1 text-[14px] font-medium  dark:text-white">Asia</p>
+            <p className="py-1 text-[14px] font-medium  dark:text-white">Europe</p>
+            <p className="py-1 text-[14px] font-medium  dark:text-white">Oceania</p>
           </div>
         </div>
       </div>
