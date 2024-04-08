@@ -6,6 +6,8 @@ import { MdKeyboardArrowDown } from "react-icons/md";
 import { useState } from "react";
 import CountryCard from "./components/CountryCard";
 
+import Link from "next/link";
+
 export default function Home() {
 
   const [clickRegion, setClickRegion] = useState(false);
@@ -36,9 +38,18 @@ export default function Home() {
       </div>
 
       <div className="flex flex-col gap-8 px-8 mt-10">
-        <CountryCard />
-        <CountryCard />
-        <CountryCard />
+
+        <Link href={`/country/Finland`}>
+          <CountryCard />
+        </Link>
+
+        <Link href={'/country/Norway'}>
+          <CountryCard />
+        </Link>
+
+        <Link href={'/country/Iceland'}>
+          <CountryCard />
+        </Link>
       </div>
     </main>
   );

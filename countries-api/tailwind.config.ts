@@ -16,6 +16,9 @@ const config: Config = {
       },
       fontFamily:{
         "nunito": ["Nunito Sans", "sans-serif"]
+      },
+      boxShadow: {
+        '3xl': '3px 3px 10px 2px rgba(0, 0, 0, 0.15), -1px -1px 10px 0px rgba(0, 0, 0, 0.15)',
       }
     },
   },
