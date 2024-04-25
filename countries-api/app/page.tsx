@@ -12,7 +12,12 @@ type Country = {
   name: {
     common: string
   },
-  region: string
+  region: string,
+  population: number,
+  flags: {
+    png: string
+  },
+  capital: string
 }
 
 export default function Home() {
@@ -51,13 +56,14 @@ export default function Home() {
     );
 
     setFilterCountries(filtered);
+    setAllCountries(filtered);
   }
 
   function OnClickRegion(name: string) {
 
     if (filterCountries.length > 0) {
 
-      let regionFilter = filterCountries?.filter((country: Country) =>
+      let regionFilter = countries?.filter((country: Country) =>
         country.region.toLowerCase().includes(name.toLowerCase())
       );
 
@@ -71,6 +77,8 @@ export default function Home() {
 
       setFilterCountries(filtered);
     }
+
+    setClickRegion(!clickRegion)
   }
 
   return (
@@ -89,11 +97,11 @@ export default function Home() {
           </div>
 
           <div className={`w-full duration-200 bg-white dark:bg-[#2b3743] mt-2 absolute shadow-md ${clickRegion ? 'h-auto opacity-1 pl-6 py-4' : 'h-0 opacity-0 p-0'}`}>
-            <p className="py-1 text-[14px] font-medium dark:text-white" onClick={() => OnClickRegion("Africa")}>Africa</p>
-            <p className="py-1 text-[14px] font-medium  dark:text-white" onClick={() => OnClickRegion("America")}>America</p>
-            <p className="py-1 text-[14px] font-medium  dark:text-white" onClick={() => OnClickRegion("Asia")}>Asia</p>
-            <p className="py-1 text-[14px] font-medium  dark:text-white" onClick={() => OnClickRegion("Europe")}>Europe</p>
-            <p className="py-1 text-[14px] font-medium  dark:text-white" onClick={() => OnClickRegion("Oceania")}>Oceania</p>
+            <p className="py-1 text-[14px] font-medium dark:text-white cursor-pointer" onClick={() => OnClickRegion("Africa")}>Africa</p>
+            <p className="py-1 text-[14px] font-medium  dark:text-white cursor-pointer" onClick={() => OnClickRegion("America")}>America</p>
+            <p className="py-1 text-[14px] font-medium  dark:text-white cursor-pointer" onClick={() => OnClickRegion("Asia")}>Asia</p>
+            <p className="py-1 text-[14px] font-medium  dark:text-white cursor-pointer" onClick={() => OnClickRegion("Europe")}>Europe</p>
+            <p className="py-1 text-[14px] font-medium  dark:text-white cursor-pointer" onClick={() => OnClickRegion("Oceania")}>Oceania</p>
           </div>
         </div>
       </div>
@@ -105,8 +113,8 @@ export default function Home() {
 
           filterCountries.length != 0 ? filterCountries.map((c: Country, index) => {
             return <>
-              <Link href={'/country/mmm'} key={index}>
-                <CountryCard />
+              <Link href={`/country/${c.name.common}`} key={index}>
+                <CountryCard name={c.name.common} population={c.population} region={c.region} capital={c.capital} flag={c.flags.png}/>
               </Link>
             </>
           }) : null
