@@ -3,21 +3,82 @@
 import { IoIosSearch } from "react-icons/io";
 import { MdKeyboardArrowDown } from "react-icons/md";
 
-import { useState } from "react";
+import { useState, useEffect, ChangeEvent } from "react";
 import CountryCard from "./components/CountryCard";
 
 import Link from "next/link";
 
+type Country = {
+  name: {
+    common: string
+  },
+  region: string
+}
+
 export default function Home() {
 
   const [clickRegion, setClickRegion] = useState(false);
+  const [title, setTitle] = useState('');
+  const [countries, setAllCountries] = useState([]);
+  const [filterCountries, setFilterCountries] = useState([]);
+
+  useEffect(() => {
+
+    async function FetchData() {
+
+      if (title == '' || title == null) {
+        const response = await fetch(`https://restcountries.com/v3.1/all`);
+
+        const data = await response.json();
+
+        setAllCountries(data);
+        setFilterCountries(data);
+      }
+
+    }
+
+    FetchData();
+
+  }, [])
+
+  async function OnChangeInput(e: ChangeEvent<HTMLInputElement>) {
+    const input = e.target.value;
+
+    setTitle(input);
+
+    let filtered = countries?.filter((country: Country) =>
+      country.name.common.toLowerCase().includes(input.toLowerCase())
+    );
+
+    setFilterCountries(filtered);
+  }
+
+  function OnClickRegion(name: string) {
+
+    if (filterCountries.length > 0) {
+
+      let regionFilter = filterCountries?.filter((country: Country) =>
+        country.region.toLowerCase().includes(name.toLowerCase())
+      );
+
+      setFilterCountries(regionFilter);
+
+    }
+    else {
+      let filtered = countries?.filter((country: Country) =>
+        country.region.toLowerCase().includes(name.toLowerCase())
+      );
+
+      setFilterCountries(filtered);
+    }
+  }
 
   return (
     <main className="flex min-h-screen flex-col items-center justify-start pt-10 px-4 bg-[#fafafa] font-nunito dark:bg-[#202d36]">
 
       <div className="w-full shadow-md rounded-lg relative">
         <IoIosSearch className="absolute left-5 top-[50%] translate-y-[-50%] text-2xl text-slate-400" />
-        <input className="w-full py-3 pl-16 pr-4 rounded-lg outline-none text-xs dark:text-white dark:bg-[#2b3743]" type="text" name="title" placeholder="Search for a country..." />
+        <input className="w-full py-3 pl-16 pr-4 rounded-lg outline-none text-xs dark:text-white dark:bg-[#2b3743]" type="text" name="title" placeholder="Search for a country..." onChange={OnChangeInput} />
       </div>
 
       <div className="mt-10 w-full">
@@ -28,28 +89,30 @@ export default function Home() {
           </div>
 
           <div className={`w-full duration-200 bg-white dark:bg-[#2b3743] mt-2 absolute shadow-md ${clickRegion ? 'h-auto opacity-1 pl-6 py-4' : 'h-0 opacity-0 p-0'}`}>
-            <p className="py-1 text-[14px] font-medium dark:text-white">Africa</p>
-            <p className="py-1 text-[14px] font-medium  dark:text-white">America</p>
-            <p className="py-1 text-[14px] font-medium  dark:text-white">Asia</p>
-            <p className="py-1 text-[14px] font-medium  dark:text-white">Europe</p>
-            <p className="py-1 text-[14px] font-medium  dark:text-white">Oceania</p>
+            <p className="py-1 text-[14px] font-medium dark:text-white" onClick={() => OnClickRegion("Africa")}>Africa</p>
+            <p className="py-1 text-[14px] font-medium  dark:text-white" onClick={() => OnClickRegion("America")}>America</p>
+            <p className="py-1 text-[14px] font-medium  dark:text-white" onClick={() => OnClickRegion("Asia")}>Asia</p>
+            <p className="py-1 text-[14px] font-medium  dark:text-white" onClick={() => OnClickRegion("Europe")}>Europe</p>
+            <p className="py-1 text-[14px] font-medium  dark:text-white" onClick={() => OnClickRegion("Oceania")}>Oceania</p>
           </div>
         </div>
       </div>
 
       <div className="flex flex-col gap-8 px-8 mt-10">
 
-        <Link href={`/country/Finland`}>
-          <CountryCard />
-        </Link>
 
-        <Link href={'/country/Norway'}>
-          <CountryCard />
-        </Link>
+        {
 
-        <Link href={'/country/Iceland'}>
-          <CountryCard />
-        </Link>
+          filterCountries.length != 0 ? filterCountries.map((c: Country, index) => {
+            return <>
+              <Link href={'/country/mmm'} key={index}>
+                <CountryCard />
+              </Link>
+            </>
+          }) : null
+
+        }
+
       </div>
     </main>
   );

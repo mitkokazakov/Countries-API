@@ -10,10 +10,10 @@ type ParamsType = {
 
 const page = ({ params }: ParamsType) => {
     return (
-        <div className=' flex flex-col px-8 py-8 bg-[#fafafa] min-h-screen'>
+        <div className=' flex flex-col px-8 py-8 bg-[#fafafa] dark:bg-[#202d36] min-h-screen'>
 
-            <div className='flex justify-start'>
-                <Link href={'/'} className=' flex justify-center items-center gap-3 w-32 shadow-3xl py-2 outline-none'>
+            <div className='flex justify-start '>
+                <Link href={'/'} className=' flex justify-center items-center gap-3 w-32 shadow-3xl py-2 outline-none dark:text-white dark:bg-[#2b3743]'>
                     <FaArrowLeftLong />
                     Back
                 </Link>
@@ -25,7 +25,7 @@ const page = ({ params }: ParamsType) => {
                     <img className='w-full' src="https://flagcdn.com/w320/ax.png" alt="Country Image" />
                 </div>
 
-                <div className='flex flex-col'>
+                <div className='flex flex-col dark:text-white'>
                     <div className='w-full flex flex-col mt-10 md:flex-row md:justify-evenly md:items-start '>
                         <div className='flex flex-col'>
                             <h1 className='text-2xl font-extrabold pb-4'>{params.name}</h1>
@@ -51,23 +51,23 @@ const page = ({ params }: ParamsType) => {
                         <h1 className='text-lg font-bold'>Border Countries:</h1>
 
                         <div className='flex flex-wrap w-full gap-3'>
-                            <Link href={'/'} className='grow min-w-[30%] shadow-3xl py-2 px-2 text-center '>
+                            <Link href={'/'} className='grow min-w-[30%] shadow-3xl py-2 px-2 text-center dark:bg-[#2b3743]'>
                                 Norway
                             </Link>
 
-                            <Link href={'/'} className=' grow min-w-[30%]  shadow-3xl py-2 px-2 text-center '>
+                            <Link href={'/'} className=' grow min-w-[30%]  shadow-3xl py-2 px-2 text-center dark:bg-[#2b3743]'>
                                 Norway
                             </Link>
 
-                            <Link href={'/'} className='grow  min-w-[30%]  shadow-3xl py-2 px-2 text-center '>
+                            <Link href={'/'} className='grow  min-w-[30%]  shadow-3xl py-2 px-2 text-center dark:bg-[#2b3743]'>
                                 Netherlands
                             </Link>
 
-                            <Link href={'/'} className='grow  min-w-[30%]  shadow-3xl py-2 px-2 text-center '>
+                            <Link href={'/'} className='grow  min-w-[30%]  shadow-3xl py-2 px-2 text-center dark:bg-[#2b3743]'>
                                 Netherlands
                             </Link>
 
-                            <Link href={'/'} className='grow  min-w-[30%]  shadow-3xl py-2 px-2 text-center '>
+                            <Link href={'/'} className='grow  min-w-[30%]  shadow-3xl py-2 px-2 text-center dark:bg-[#2b3743]'>
                                 Netherlands
                             </Link>
                         </div>
