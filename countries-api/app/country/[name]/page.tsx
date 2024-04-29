@@ -9,6 +9,12 @@ type ParamsType = {
 }
 
 const page = ({ params }: ParamsType) => {
+
+    let splittedName = params.name.split('%20');
+
+    let finalName = splittedName.join(' ');
+
+    
     return (
         <div className=' flex flex-col px-8 py-8 bg-[#fafafa] dark:bg-[#202d36] min-h-screen'>
 
@@ -28,10 +34,10 @@ const page = ({ params }: ParamsType) => {
                 <div className='flex flex-col dark:text-white'>
                     <div className='w-full flex flex-col mt-10 md:flex-row md:justify-evenly md:items-start '>
                         <div className='flex flex-col'>
-                            <h1 className='text-2xl font-extrabold pb-4'>{params.name}</h1>
+                            <h1 className='text-2xl font-extrabold pb-4'>{finalName}</h1>
 
                             <div className='flex flex-col gap-3'>
-                                <p className=' font-extralight'><span className=' font-bold'>Native Name: </span>{params.name}</p>
+                                <p className=' font-extralight'><span className=' font-bold'>Native Name: </span>{finalName}</p>
                                 <p className=' font-extralight'><span className=' font-bold'>Population:</span> 81,777,234</p>
                                 <p className=' font-extralight'><span className=' font-bold'>Region:</span> Europe</p>
                                 <p className=' font-extralight'><span className=' font-bold'>Sub Region:</span> Europe</p>
