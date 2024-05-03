@@ -32,7 +32,17 @@ const page = async ({ params }: ParamsType) => {
     
     const nativeName = nativeNames[0];
 
-    console.log(nativeName.common);
+    const currencies: {name:string}[] = Object.values(country.currencies)
+
+    const currenciesArray = currencies.map(c => {
+        return c.name;
+    })
+
+    const currenciesString = currenciesArray.join(', ')
+
+    const languages = Object.values(country.languages);
+
+    const languagesString = languages.join(', ');
     
 
 
@@ -68,8 +78,8 @@ const page = async ({ params }: ParamsType) => {
 
                         <div className='flex flex-col gap-3 mt-8 md:pt-4'>
                             <p className=' font-extralight lg:text-sm'><span className=' font-bold'>Top Level Domain: </span> {country.tld[0]}</p>
-                            <p className=' font-extralight lg:text-sm'><span className=' font-bold'>Currencies: </span>Euro</p>
-                            <p className=' font-extralight lg:text-sm'><span className=' font-bold'>Languages: </span>Dutch, French, German</p>
+                            <p className=' font-extralight lg:text-sm'><span className=' font-bold'>Currencies: </span>{currenciesString}</p>
+                            <p className=' font-extralight lg:text-sm'><span className=' font-bold'>Languages: </span>{languagesString}</p>
                         </div>
 
                     </div>

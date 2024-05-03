@@ -96,7 +96,7 @@ export default function Home() {
             <MdKeyboardArrowDown className="text-md cursor-pointer dark:text-white" onClick={() => { setClickRegion(!clickRegion) }} />
           </div>
 
-          <div className={`w-full duration-200 bg-white dark:bg-[#2b3743] mt-2 absolute shadow-md ${clickRegion ? 'h-auto opacity-1 pl-6 py-4' : 'h-0 opacity-0 p-0'}`}>
+          <div className={`w-full duration-200 bg-white dark:bg-[#2b3743] mt-2 absolute shadow-md ${clickRegion ? 'h-auto opacity-1 pl-6 py-4 pointer-events-auto' : 'h-0 opacity-0 p-0 pointer-events-none'}`}>
             <p className="py-1 text-[14px] font-medium dark:text-white cursor-pointer" onClick={() => OnClickRegion("Africa")}>Africa</p>
             <p className="py-1 text-[14px] font-medium  dark:text-white cursor-pointer" onClick={() => OnClickRegion("America")}>America</p>
             <p className="py-1 text-[14px] font-medium  dark:text-white cursor-pointer" onClick={() => OnClickRegion("Asia")}>Asia</p>
