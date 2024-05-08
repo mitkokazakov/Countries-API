@@ -2,18 +2,14 @@ import React from 'react'
 import Link from 'next/link'
 import { FaArrowLeftLong } from "react-icons/fa6";
 
+import { ExtractNativeName,ExtractCurrencies, ExtractLanguages } from '@/app/libs/services';
+
 type ParamsType = {
     params: {
         name: string
     }
 }
 
-type CountryDetails = {
-    currencies: {},
-    name: {
-        official: string
-    }
-}
 
 const page = async ({ params }: ParamsType) => {
 
@@ -28,21 +24,11 @@ const page = async ({ params }: ParamsType) => {
 
     const country = data[0];
 
-    const nativeNames: {official:string, common:string}[] = Object.values(country.name.nativeName)
-    
-    const nativeName = nativeNames[0];
+    const nativeName = ExtractNativeName(country);
 
-    const currencies: {name:string}[] = Object.values(country.currencies)
+    const currenciesString = ExtractCurrencies(country);
 
-    const currenciesArray = currencies.map(c => {
-        return c.name;
-    })
-
-    const currenciesString = currenciesArray.join(', ')
-
-    const languages = Object.values(country.languages);
-
-    const languagesString = languages.join(', ');
+    const languagesString = ExtractLanguages(country);
     
 
 
