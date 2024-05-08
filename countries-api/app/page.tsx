@@ -26,6 +26,7 @@ export default function Home() {
   const [title, setTitle] = useState('');
   const [countries, setAllCountries] = useState([]);
   const [filterCountries, setFilterCountries] = useState([]);
+  const [filterByRegionCountries, setFilterByRegionCountries] = useState([]);
 
   useEffect(() => {
 
@@ -38,6 +39,7 @@ export default function Home() {
 
         setAllCountries(data);
         setFilterCountries(data);
+        setFilterByRegionCountries(data);
       }
 
     }
@@ -56,18 +58,24 @@ export default function Home() {
     );
 
     setFilterCountries(filtered);
-    setAllCountries(filtered);
+    setFilterByRegionCountries(filtered);
+    //setAllCountries(filtered);
   }
 
   function OnClickRegion(name: string) {
 
     if (filterCountries.length > 0) {
 
-      let regionFilter = countries?.filter((country: Country) =>
+      // let regionFilter = countries?.filter((country: Country) =>
+      //   country.region.toLowerCase().includes(name.toLowerCase())
+      // );
+
+      let regionFilter = filterCountries?.filter((country: Country) =>
         country.region.toLowerCase().includes(name.toLowerCase())
       );
 
-      setFilterCountries(regionFilter);
+      setFilterByRegionCountries(regionFilter);
+      //setFilterCountries(regionFilter);
 
     }
     else {
@@ -75,7 +83,8 @@ export default function Home() {
         country.region.toLowerCase().includes(name.toLowerCase())
       );
 
-      setFilterCountries(filtered);
+      setFilterByRegionCountries(filtered);
+      //setFilterCountries(filtered);
     }
 
     setClickRegion(!clickRegion)
@@ -111,7 +120,7 @@ export default function Home() {
 
         {
 
-          filterCountries.length != 0 ? filterCountries.map((c: Country, index) => {
+          filterByRegionCountries.length != 0 ? filterByRegionCountries.map((c: Country, index) => {
             return <>
               <Link href={`/country/${c.name.common}`} key={index}>
                 <CountryCard name={c.name.common} population={c.population} region={c.region} capital={c.capital} flag={c.flags.png}/>
