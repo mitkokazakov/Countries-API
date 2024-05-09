@@ -2,7 +2,7 @@ import React from 'react'
 import Link from 'next/link'
 import { FaArrowLeftLong } from "react-icons/fa6";
 
-import { ExtractNativeName,ExtractCurrencies, ExtractLanguages } from '@/app/libs/services';
+import { ExtractNativeName,ExtractCurrencies, ExtractLanguages, FormatPopulation } from '@/app/libs/services';
 
 type ParamsType = {
     params: {
@@ -30,7 +30,7 @@ const page = async ({ params }: ParamsType) => {
 
     const languagesString = ExtractLanguages(country);
     
-
+    const formattedPopulation = FormatPopulation(country.population);
 
     return (
         <div className=' flex flex-col px-8 py-8 bg-[#fafafa] dark:bg-[#202d36] min-h-screen'>
@@ -55,7 +55,7 @@ const page = async ({ params }: ParamsType) => {
 
                             <div className='flex flex-col gap-3'>
                                 <p className=' font-extralight lg:text-sm'><span className=' font-bold'>Native Name: </span>{nativeName.common}</p>
-                                <p className=' font-extralight lg:text-sm'><span className=' font-bold'>Population: </span> {country.population}</p>
+                                <p className=' font-extralight lg:text-sm'><span className=' font-bold'>Population: </span> {formattedPopulation}</p>
                                 <p className=' font-extralight lg:text-sm'><span className=' font-bold'>Region: </span> {country.region}</p>
                                 <p className=' font-extralight lg:text-sm'><span className=' font-bold'>Sub Region: </span> {country.subregion}</p>
                                 <p className=' font-extralight lg:text-sm'><span className=' font-bold'>Capital: </span> {country.capital}</p>

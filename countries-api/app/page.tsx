@@ -117,7 +117,7 @@ export default function Home() {
         </div>
       </div>
 
-      <div className=" flex flex-col gap-8 px-8 mt-10 md:flex-row md:justify-between md:items-center md:flex-wrap lg:px-0 lg:flex-row lg:flex-wrap lg:justify-between lg:items-center">
+      <div className=" flex flex-col gap-8 px-8 mt-10 md:flex-row md:justify-between md:items-center md:flex-wrap md:w-full lg:w-full lg:px-0 lg:flex-row lg:flex-wrap lg:justify-between lg:items-center">
 
 
         {

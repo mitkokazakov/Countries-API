@@ -26,3 +26,12 @@ export function ExtractLanguages(country: { languages: {} }) {
 
     return languagesString;
 }
+
+export function FormatPopulation(population: number){
+
+    let populationAsString = population.toString();
+
+    let result = populationAsString.replace(/,/g,"").replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+
+    return result;
+}
