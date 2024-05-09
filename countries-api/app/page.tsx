@@ -3,6 +3,8 @@
 import { IoIosSearch } from "react-icons/io";
 import { MdKeyboardArrowDown } from "react-icons/md";
 
+import { Suspense } from "react";
+
 import { useState, useEffect, ChangeEvent } from "react";
 import CountryCard from "./components/CountryCard";
 
@@ -117,6 +119,7 @@ export default function Home() {
         </div>
       </div>
 
+
       <div className=" flex flex-col gap-8 px-8 mt-10 md:flex-row md:justify-between md:items-center md:flex-wrap md:w-full lg:w-full lg:px-0 lg:flex-row lg:flex-wrap lg:justify-between lg:items-center">
 
 
@@ -133,6 +136,7 @@ export default function Home() {
         }
 
       </div>
-    </main>
+
+    </main >
   );
 }
