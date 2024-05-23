@@ -121,14 +121,14 @@ export default function Home() {
       </div>
 
 
-      <div className=" flex flex-col gap-8 px-8 mt-10 md:flex-row md:justify-between md:items-center md:flex-wrap md:w-full lg:w-full lg:px-0 lg:flex-row lg:flex-wrap lg:justify-center lg:items-center">
+      <div className="grid gap-8 px-8 mt-10 lg:px-0 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5">
 
 
         {
 
           filterByRegionCountries.length != 0 ? filterByRegionCountries.map((c: Country, index) => {
             return <>
-              <Link className="md:flex-[0_1_30%] lg:flex-[0_1_15%]" href={`/country/${c.name.common}`} key={index}>
+              <Link href={`/country/${c.name.common}`} key={index}>
                 <CountryCard name={c.name.common} population={c.population} region={c.region} capital={c.capital} flag={c.flags.png} />
               </Link>
             </>
