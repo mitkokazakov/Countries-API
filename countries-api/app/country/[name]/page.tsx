@@ -18,7 +18,7 @@ const page = async ({ params }: ParamsType) => {
     let finalName = splittedName.join(' ');
 
 
-    const response = await fetch(`https://restcountries.com/v3.1/name/${finalName}?fullText=true`);
+    const response = await fetch(`https://restcountries.com/v3.1/name/${finalName.toLocaleLowerCase()}`);
 
     const data = await response.json();
 

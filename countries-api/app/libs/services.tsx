@@ -1,3 +1,10 @@
+// import fsPromises from 'fs/promises';
+// import path from 'path'
+
+import {promises as fs} from 'fs';
+
+
+
 export function ExtractNativeName(country: { name: { nativeName: {} } }) {
 
     const nativeNames: { official: string, common: string }[] = Object.values(country.name.nativeName)
@@ -35,3 +42,17 @@ export function FormatPopulation(population: number){
 
     return result;
 }
+
+// export async function ReadData(){
+
+// // const filePath = path.join(process.cwd(), 'libs/data.json');
+// // const jsonData = (await fsPromises.readFile(filePath)).toString();
+// // const objectData: [] = JSON.parse(jsonData);
+
+// console.log(process.cwd());
+
+// const file = await fs.readFile(process.cwd() + 'libs/data.json', 'utf8');
+// const data: [] = JSON.parse(file);
+
+// return data;
+// }

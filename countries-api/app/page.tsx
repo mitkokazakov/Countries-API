@@ -3,7 +3,6 @@
 import { IoIosSearch } from "react-icons/io";
 import { MdKeyboardArrowDown } from "react-icons/md";
 
-import { Suspense } from "react";
 
 import { useState, useEffect, ChangeEvent } from "react";
 
@@ -11,10 +10,22 @@ import CountryCard from "./components/CountryCard";
 
 import Link from "next/link";
 
-type Country = {
+import jsonData from './libs/data.json';
+
+type CountryFromAPI = {
   name: {
     common: string
   },
+  region: string,
+  population: number,
+  flags: {
+    png: string
+  },
+  capital: string
+}
+
+type Country = {
+  name: string,
   region: string,
   population: number,
   flags: {
@@ -36,9 +47,12 @@ export default function Home() {
     async function FetchData() {
 
       if (title == '' || title == null) {
-        const response = await fetch(`https://restcountries.com/v3.1/all`);
+        // const response = await fetch(`https://restcountries.com/v3.1/all`);
 
-        const data = await response.json();
+        // const data = await response.json();
+
+        const data: any = jsonData;
+        
 
         setAllCountries(data);
         setFilterCountries(data);
@@ -56,8 +70,12 @@ export default function Home() {
 
     setTitle(input);
 
+    // let filtered = countries?.filter((country: Country) =>
+    //   country.name.common.toLowerCase().includes(input.toLowerCase())
+    // );
+
     let filtered = countries?.filter((country: Country) =>
-      country.name.common.toLowerCase().includes(input.toLowerCase())
+      country.name.toLowerCase().includes(input.toLowerCase())
     );
 
     setFilterCountries(filtered);
@@ -128,8 +146,8 @@ export default function Home() {
 
           filterByRegionCountries.length != 0 ? filterByRegionCountries.map((c: Country, index) => {
             return <>
-              <Link href={`/country/${c.name.common}`} key={index}>
-                <CountryCard name={c.name.common} population={c.population} region={c.region} capital={c.capital} flag={c.flags.png} />
+              <Link href={`/country/${c.name}`} key={index}>
+                <CountryCard name={c.name} population={c.population} region={c.region} capital={c.capital} flag={c.flags.png} />
               </Link>
             </>
           }) : null
