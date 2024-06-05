@@ -53,14 +53,14 @@ const page = async ({ params }: ParamsType) => {
 
     const country = currentCountry[0];
 
-    //const currenciesString = ExtractCurrencies(country);
+    const currenciesString = ExtractCurrencies(country);
 
-    //const languagesString = ExtractLanguages(country);
+    const languagesString = ExtractLanguages(country);
     
     const formattedPopulation = FormatPopulation(country.population);
 
     return (
-        <div className=' flex flex-col px-8 py-8 bg-[#fafafa] dark:bg-[#202d36] min-h-screen max-w-[1900px]'>
+        <div className=' flex flex-col px-8 py-8 bg-[#fafafa] dark:bg-[#202d36] min-h-screen max-w-[1900px] lg:px-32'>
 
             <div className='flex justify-start '>
                 <Link href={'/'} className=' flex justify-center items-center gap-3 w-32 shadow-3xl py-2 outline-none dark:text-white dark:bg-[#2b3743]'>
@@ -76,7 +76,7 @@ const page = async ({ params }: ParamsType) => {
                 </div>
 
                 <div className='flex flex-col dark:text-white lg:justify-center lg:items-start lg:w-1/2 lg:py-5 '>
-                    <div className='w-full flex flex-col mt-10 md:flex-row md:justify-evenly md:items-start  lg:justify-start'>
+                    <div className='w-full flex flex-col mt-10 md:flex-row md:justify-evenly md:items-start  lg:grid lg:grid-cols-2'>
                         <div className='flex flex-col'>
                             <h1 className='text-2xl font-extrabold pb-4'>{finalName}</h1>
 
@@ -91,8 +91,8 @@ const page = async ({ params }: ParamsType) => {
 
                         <div className='flex flex-col gap-3 mt-8 md:pt-4 '>
                             <p className=' font-extralight lg:text-sm'><span className=' font-bold'>Top Level Domain: </span> {country.topLevelDomain[0]}</p>
-                            <p className=' font-extralight lg:text-sm'><span className=' font-bold'>Currencies: </span>Euro</p>
-                            <p className=' font-extralight lg:text-sm'><span className=' font-bold'>Languages: </span>Norsk</p>
+                            <p className=' font-extralight lg:text-sm'><span className=' font-bold'>Currencies: </span>{currenciesString}</p>
+                            <p className=' font-extralight lg:text-sm'><span className=' font-bold'>Languages: </span>{languagesString}</p>
                         </div>
 
                     </div>

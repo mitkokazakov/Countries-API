@@ -14,10 +14,10 @@ export function ExtractNativeName(country: { name: { nativeName: {} } }) {
     return nativeName;
 }
 
-export function ExtractCurrencies(country: { currencies: {} }) {
-    const currencies: { name: string }[] = Object.values(country.currencies)
+export function ExtractCurrencies(country: { currencies: [{name: string}] }) {
+    //const currencies: { name: string }[] = Object.values(country.currencies)
 
-    const currenciesArray = currencies.map(c => {
+    const currenciesArray = country.currencies.map(c => {
         return c.name;
     })
 
@@ -26,10 +26,13 @@ export function ExtractCurrencies(country: { currencies: {} }) {
     return currenciesString;
 }
 
-export function ExtractLanguages(country: { languages: {} }) {
-    const languages = Object.values(country.languages);
+export function ExtractLanguages(country: { languages: [{name:string}] }) {
 
-    const languagesString = languages.join(', ');
+    const languagesArray = country.languages.map(c => {
+        return c.name;
+    })
+
+    const languagesString = languagesArray.join(', ');
 
     return languagesString;
 }
