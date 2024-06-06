@@ -1,61 +1,75 @@
 // import fsPromises from 'fs/promises';
 // import path from 'path'
 
-import {promises as fs} from 'fs';
-
-
+type Country = {
+    name: string;
+    alpha3Code: string;
+}
 
 export function ExtractNativeName(country: { name: { nativeName: {} } }) {
+  const nativeNames: { official: string; common: string }[] = Object.values(
+    country.name.nativeName
+  );
 
-    const nativeNames: { official: string, common: string }[] = Object.values(country.name.nativeName)
+  const nativeName = nativeNames[0];
 
-    const nativeName = nativeNames[0];
-
-    return nativeName;
+  return nativeName;
 }
 
-export function ExtractCurrencies(country: { currencies: [{name: string}] }) {
-    //const currencies: { name: string }[] = Object.values(country.currencies)
+export function ExtractCurrencies(country: { currencies: [{ name: string }] }) {
+  //const currencies: { name: string }[] = Object.values(country.currencies)
 
-    const currenciesArray = country.currencies.map(c => {
-        return c.name;
-    })
+  if(!country.currencies){
+    return "";
+  }
+  const currenciesArray = country.currencies.map((c) => {
+    return c.name;
+  });
 
-    const currenciesString = currenciesArray.join(', ')
+  const currenciesString = currenciesArray.join(", ");
 
-    return currenciesString;
+  return currenciesString;
 }
 
-export function ExtractLanguages(country: { languages: [{name:string}] }) {
+export function ExtractLanguages(country: { languages: [{ name: string }] }) {
+  const languagesArray = country.languages.map((c) => {
+    return c.name;
+  });
 
-    const languagesArray = country.languages.map(c => {
-        return c.name;
-    })
+  const languagesString = languagesArray.join(", ");
 
-    const languagesString = languagesArray.join(', ');
-
-    return languagesString;
+  return languagesString;
 }
 
-export function FormatPopulation(population: number){
+export function FormatPopulation(population: number) {
+  let populationAsString = population.toString();
 
-    let populationAsString = population.toString();
+  let result = populationAsString
+    .replace(/,/g, "")
+    .replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 
-    let result = populationAsString.replace(/,/g,"").replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-
-    return result;
+  return result;
 }
 
-// export async function ReadData(){
+export function ExtractBorderCountries(borders: string[], data: any) {
 
-// // const filePath = path.join(process.cwd(), 'libs/data.json');
-// // const jsonData = (await fsPromises.readFile(filePath)).toString();
-// // const objectData: [] = JSON.parse(jsonData);
+  let fullNameBorderCountries: string[] = [];
 
-// console.log(process.cwd());
+  if(!borders){
+    return [];
+  }
 
-// const file = await fs.readFile(process.cwd() + 'libs/data.json', 'utf8');
-// const data: [] = JSON.parse(file);
+  for (let index = 0; index < borders.length; index++) {
 
-// return data;
-// }
+    const currentBorder = borders[index];
+
+    const foundBorderCountry: Country = data.find((country: Country) => country.alpha3Code == currentBorder);
+
+    const foundBorderCountryFullName = foundBorderCountry.name;
+
+    fullNameBorderCountries.push(foundBorderCountryFullName);
+
+  }
+
+  return fullNameBorderCountries;
+}
