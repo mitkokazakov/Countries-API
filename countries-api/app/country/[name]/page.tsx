@@ -43,6 +43,9 @@ type Country = {
 };
 
 const page = async ({ params }: ParamsType) => {
+
+  //await new Promise((resolve) => setTimeout(resolve, 50000));
+
   let data: any = jsonData;
 
   let splittedName = params.name.split("%20");

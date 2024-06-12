@@ -3,13 +3,15 @@
 import { IoIosSearch } from "react-icons/io";
 import { MdKeyboardArrowDown } from "react-icons/md";
 
-import { useState, useEffect, ChangeEvent } from "react";
+import { useState, useEffect, ChangeEvent, Suspense } from "react";
 
 import CountryCard from "./components/CountryCard";
 
 import Link from "next/link";
 
 import jsonData from "./libs/data.json";
+import Loader from "./components/Loader";
+import NavBar from "./components/NavBar";
 
 type CountryFromAPI = {
   name: {
@@ -34,6 +36,8 @@ type Country = {
 };
 
 export default function Home() {
+  //await new Promise((resolve) => setTimeout(resolve, 50000));
+
   const [clickRegion, setClickRegion] = useState(false);
   const [regionName, setRegionName] = useState("");
   const [title, setTitle] = useState("");
@@ -99,9 +103,11 @@ export default function Home() {
         country.region.toLowerCase().includes(name.toLowerCase())
       );
 
-      if(title != ""){
-         regionFilter = filterCountries?.filter((country: Country) =>
-          country.region.toLowerCase().includes(name.toLowerCase()) && country.name.toLowerCase().includes(title.toLowerCase())
+      if (title != "") {
+        regionFilter = filterCountries?.filter(
+          (country: Country) =>
+            country.region.toLowerCase().includes(name.toLowerCase()) &&
+            country.name.toLowerCase().includes(title.toLowerCase())
         );
       }
 
@@ -112,9 +118,11 @@ export default function Home() {
         country.region.toLowerCase().includes(name.toLowerCase())
       );
 
-      if(title != ""){
-         filtered = countries?.filter((country: Country) =>
-          country.region.toLowerCase().includes(name.toLowerCase()) && country.name.toLowerCase().includes(title.toLowerCase())
+      if (title != "") {
+        filtered = countries?.filter(
+          (country: Country) =>
+            country.region.toLowerCase().includes(name.toLowerCase()) &&
+            country.name.toLowerCase().includes(title.toLowerCase())
         );
       }
 
@@ -141,16 +149,16 @@ export default function Home() {
 
         <div className="mt-10 w-full lg:mt-0 lg:w-1/4">
           <div className=" w-2/4 relative lg:w-full">
-            <div className="w-full flex justify-between items-center pl-6 pr-4 py-3 bg-white rounded-md shadow-md dark:bg-[#2b3743] cursor-pointer" onClick={() => {
-                  setClickRegion(!clickRegion);
-                }}>
+            <div
+              className="w-full flex justify-between items-center pl-6 pr-4 py-3 bg-white rounded-md shadow-md dark:bg-[#2b3743] cursor-pointer"
+              onClick={() => {
+                setClickRegion(!clickRegion);
+              }}
+            >
               <p className="text-[10px] font-medium tracking-widest lg:text-base dark:text-white">
                 {regionName == "" ? "Filter By Region" : `${regionName}`}
               </p>
-              <MdKeyboardArrowDown
-                className="text-md cursor-pointer dark:text-white"
-                
-              />
+              <MdKeyboardArrowDown className="text-md cursor-pointer dark:text-white" />
             </div>
 
             <div
@@ -195,25 +203,30 @@ export default function Home() {
         </div>
       </div>
 
-      <div className="grid gap-8 px-8 mt-10 lg:px-0 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5">
-        {filterByRegionCountries.length != 0
-          ? filterByRegionCountries.map((c: Country, index) => {
-              return (
-                <>
-                  <Link href={`/country/${c.name}`} key={index}>
-                    <CountryCard
-                      name={c.name}
-                      population={c.population}
-                      region={c.region}
-                      capital={c.capital}
-                      flag={c.flags.png}
-                    />
-                  </Link>
-                </>
-              );
-            })
-          : null}
-      </div>
+
+      <Suspense fallback={<Loader />}>
+        <div className="grid gap-8 px-8 mt-10 lg:px-0 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5">
+          {filterByRegionCountries.length != 0
+            ? filterByRegionCountries.map(async (c: Country, index) => {
+                await new Promise((resolve) => setTimeout(resolve, 1000));
+
+                return (
+                  <>
+                    <Link href={`/country/${c.name}`} key={index}>
+                      <CountryCard
+                        name={c.name}
+                        population={c.population}
+                        region={c.region}
+                        capital={c.capital}
+                        flag={c.flags.png}
+                      />
+                    </Link>
+                  </>
+                );
+              })
+            : null}
+        </div>
+      </Suspense>
     </main>
   );
 }
