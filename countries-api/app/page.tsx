@@ -11,7 +11,6 @@ import Link from "next/link";
 
 import jsonData from "./libs/data.json";
 import Loader from "./components/Loader";
-import NavBar from "./components/NavBar";
 
 type CountryFromAPI = {
   name: {
