@@ -1,6 +1,6 @@
 # Frontend Mentor - REST Countries API with color theme switcher
 
-![Design preview for the REST Countries API with color theme switcher coding challenge](./design/desktop-preview.jpg)
+![Design preview for the REST Countries API with color theme switcher coding challenge](./images/desktop-preview.jpg)
 
 ## Welcome! 👋
 
@@ -55,6 +55,8 @@ Feel free to use any workflow that you feel comfortable with. Below is a suggest
 6. Start adding styles to the top of the page and work down. Only move on to the next section once you're happy you've completed the area you're working on.
 
 ## Deploying your project
+
+https://countries-api-app.vercel.app/
 
 As mentioned above, there are many ways to host your project for free. Our recommended hosts are:
 
