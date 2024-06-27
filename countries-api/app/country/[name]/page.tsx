@@ -83,9 +83,9 @@ const page = async ({ params }: ParamsType) => {
       </div>
 
       <div className="flex flex-col lg:flex-row lg:justify-start lg:gap-20">
-        <div className="w-full mt-16 md:w-3/4 m-auto lg:w-1/2 lg:mx-0 ">
+        <div className="w-full  mt-16 md:w-3/4 m-auto lg:w-1/2 lg:mx-0 ">
           <img
-            className="w-full"
+            className="w-full max-h-[600px]"
             src={country.flags.png}
             alt="Country Image"
           />
