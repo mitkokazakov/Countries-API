@@ -60,7 +60,7 @@ export default function Home() {
     }
 
     FetchData();
-  }, []);
+  });
 
   async function OnChangeInput(e: ChangeEvent<HTMLInputElement>) {
     const input = e.target.value;
@@ -210,7 +210,7 @@ export default function Home() {
                 await new Promise((resolve) => setTimeout(resolve, 1000));
 
                 return (
-                  <>
+                  
                     <Link href={`/country/${c.name}`} key={index}>
                       <CountryCard
                         name={c.name}
@@ -220,7 +220,7 @@ export default function Home() {
                         flag={c.flags.png}
                       />
                     </Link>
-                  </>
+                  
                 );
               })
             : null}
