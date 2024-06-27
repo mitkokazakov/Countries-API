@@ -60,7 +60,7 @@ export default function Home() {
     }
 
     FetchData();
-  });
+  },[]);
 
   async function OnChangeInput(e: ChangeEvent<HTMLInputElement>) {
     const input = e.target.value;

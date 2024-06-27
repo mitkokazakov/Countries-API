@@ -43,7 +43,6 @@ type Country = {
 };
 
 const page = async ({ params }: ParamsType) => {
-
   //await new Promise((resolve) => setTimeout(resolve, 50000));
 
   let data: any = jsonData;
@@ -139,10 +138,10 @@ const page = async ({ params }: ParamsType) => {
             <h1 className="text-lg font-bold lg:text-sm">Border Countries:</h1>
 
             <div className="flex flex-wrap w-full gap-3 lg:flex-row ">
-             
               {borders?.map((border) => {
                 return (
                   <Link
+                    key={border}
                     href={`/country/${border}`}
                     className="grow min-w-[30%]  shadow-3xl py-2 px-2 text-center dark:bg-[#2b3743] lg:text-sm lg:max-h-8 lg:flex lg:justify-center lg:items-center lg:min-w-[20%] lg:grow-0"
                   >

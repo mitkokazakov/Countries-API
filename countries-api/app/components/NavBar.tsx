@@ -14,7 +14,7 @@ const NavBar = () => {
     if (theme === "dark") {
       setDarkMode(true);
     }
-  });
+  },[]);
 
   useEffect(() => {
     if (darkMode) {
