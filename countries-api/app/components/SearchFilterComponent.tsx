@@ -25,6 +25,8 @@ const SearchFilterComponent = () => {
   const [filterCountries, setFilterCountries] = useState([]);
   const [filterByRegionCountries, setFilterByRegionCountries] = useState([]);
 
+  const [filterByNameAndRegion, setFilterByNameAndRegion] = useState([]);
+
   useEffect(() => {
     if (title == "" || title == null) {
       // const response = await fetch(`https://restcountries.com/v3.1/all`);
@@ -36,75 +38,98 @@ const SearchFilterComponent = () => {
       setAllCountries(data);
       setFilterCountries(data);
       setFilterByRegionCountries(data);
+      setFilterByNameAndRegion(data);
     }
-  }, [title]);
+  }, []);
 
   function OnChangeInput(e: ChangeEvent<HTMLInputElement>) {
     const input = e.target.value;
 
     setTitle(input);
 
-    // let filtered = countries?.filter((country: Country) =>
-    //   country.name.common.toLowerCase().includes(input.toLowerCase())
-    // );
-
-    let filtered: never[] = [];
+    let filter = [];
 
     if (regionName != "") {
-      filtered = countries?.filter(
+      filter = countries?.filter(
         (country: Country) =>
           country.name.toLowerCase().includes(input.toLowerCase()) &&
           country.region.toLowerCase() == regionName.toLowerCase()
       );
     } else {
-      filtered = countries?.filter((country: Country) =>
+      filter = countries?.filter((country: Country) =>
         country.name.toLowerCase().includes(input.toLowerCase())
       );
     }
 
-    setFilterCountries(filtered);
-    setFilterByRegionCountries(filtered);
-    //setAllCountries(filtered);
+    setFilterByNameAndRegion(filter);
+
+    // let filtered: never[] = [];
+
+    // if (regionName != "") {
+    //   filtered = countries?.filter(
+    //     (country: Country) =>
+    //       country.name.toLowerCase().includes(input.toLowerCase()) &&
+    //       country.region.toLowerCase() == regionName.toLowerCase()
+    //   );
+    // } else {
+    //   filtered = countries?.filter((country: Country) =>
+    //     country.name.toLowerCase().includes(input.toLowerCase())
+    //   );
+    // }
+
+    // setFilterCountries(filtered);
+    // setFilterByRegionCountries(filtered);
   }
 
   function OnClickRegion(name: string) {
     setRegionName(name);
 
-    if (filterCountries.length > 0) {
-      // let regionFilter = countries?.filter((country: Country) =>
-      //   country.region.toLowerCase().includes(name.toLowerCase())
-      // );
+    let filter = [];
 
-      let regionFilter = filterCountries?.filter((country: Country) =>
-        country.region.toLowerCase().includes(name.toLowerCase())
+    if (title != "") {
+      filter = countries?.filter(
+        (country: Country) =>
+          country.name.toLowerCase().includes(title.toLowerCase()) &&
+          country.region.toLowerCase() == name.toLowerCase()
       );
-
-      if (title != "") {
-        regionFilter = filterCountries?.filter(
-          (country: Country) =>
-            country.region.toLowerCase().includes(name.toLowerCase()) &&
-            country.name.toLowerCase().includes(title.toLowerCase())
-        );
-      }
-
-      setFilterByRegionCountries(regionFilter);
-      //setFilterCountries(regionFilter);
     } else {
-      let filtered = countries?.filter((country: Country) =>
+      filter = countries?.filter((country: Country) =>
         country.region.toLowerCase().includes(name.toLowerCase())
       );
-
-      if (title != "") {
-        filtered = countries?.filter(
-          (country: Country) =>
-            country.region.toLowerCase().includes(name.toLowerCase()) &&
-            country.name.toLowerCase().includes(title.toLowerCase())
-        );
-      }
-
-      setFilterByRegionCountries(filtered);
-      //setFilterCountries(filtered);
     }
+
+    setFilterByNameAndRegion(filter);
+
+    // if (filterCountries.length > 0) {
+
+    //   let regionFilter = filterCountries?.filter((country: Country) =>
+    //     country.region.toLowerCase().includes(name.toLowerCase())
+    //   );
+
+    //   if (title != "") {
+    //     regionFilter = filterCountries?.filter(
+    //       (country: Country) =>
+    //         country.region.toLowerCase().includes(name.toLowerCase()) &&
+    //         country.name.toLowerCase().includes(title.toLowerCase())
+    //     );
+    //   }
+
+    //   setFilterByRegionCountries(regionFilter);
+    // } else {
+    //   let filtered = countries?.filter((country: Country) =>
+    //     country.region.toLowerCase().includes(name.toLowerCase())
+    //   );
+
+    //   if (title != "") {
+    //     filtered = countries?.filter(
+    //       (country: Country) =>
+    //         country.region.toLowerCase().includes(name.toLowerCase()) &&
+    //         country.name.toLowerCase().includes(title.toLowerCase())
+    //     );
+    //   }
+
+    //   setFilterByRegionCountries(filtered);
+    // }
 
     setClickRegion(!clickRegion);
   }
@@ -179,10 +204,10 @@ const SearchFilterComponent = () => {
         </div>
       </div>
 
-      <Suspense fallback={<Loader/ >}>
+      <Suspense fallback={<Loader />}>
         <div className="grid gap-8 px-8 mt-10 lg:px-0 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5">
-          {filterByRegionCountries.length != 0
-            ? filterByRegionCountries.map((c: Country, index) => {
+          {filterByNameAndRegion.length != 0
+            ? filterByNameAndRegion.map((c: Country, index) => {
                 //await new Promise((resolve) => setTimeout(resolve, 1000));
 
                 return (
